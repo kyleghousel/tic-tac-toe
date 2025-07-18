@@ -48,6 +48,13 @@ class TicTacToe
   def turn_count
     board.count { |value| value != ' ' }
   end
+
+  def current_player
+    turn_count.even? ? 'X' : 'O'
+  end
+
+  def turn
+  end
 end
 
 class MoveError < StandardError

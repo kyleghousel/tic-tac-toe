@@ -42,7 +42,7 @@ class TicTacToe
   end
 
   def position_taken?(move_location)
-    true if board[move_location] != ' '
+    board[move_location] != ' '
   end
 end
 

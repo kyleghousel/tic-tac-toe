@@ -44,6 +44,10 @@ class TicTacToe
   def position_taken?(move_location)
     board[move_location] != ' '
   end
+
+  def turn_count
+    board.count { |value| value != ' ' }
+  end
 end
 
 class MoveError < StandardError

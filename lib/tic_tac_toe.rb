@@ -1,3 +1,5 @@
+require 'pry'
+
 class TicTacToe
   attr_accessor :board
 
@@ -11,6 +13,7 @@ class TicTacToe
     [0, 4, 8], # First diagonal
     [2, 4, 6] # Second diagnoal
   ]
+
   def initialize
     @board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
   end
@@ -21,5 +24,30 @@ class TicTacToe
     puts " #{board[3]} | #{board[4]} | #{board[5]} "
     puts '-----------'
     puts " #{board[6]} | #{board[7]} | #{board[8]} "
+  end
+
+  def input_to_index(input)
+    raise ArgumentError if input.nil?
+    raise MoveError unless valid_move?(input)
+
+    input.to_i - 1
+  end
+
+  def valid_move?(input)
+    input.to_i.to_s == input && (1..9).include?(input.to_i)
+  end
+
+  def move(move_location, player_token = 'X')
+    board[move_location] = player_token
+  end
+
+  def position_taken?(move_location)
+    true if board[move_location] != ' '
+  end
+end
+
+class MoveError < StandardError
+  def message
+    'Invalid move! Please enter a number between 1 and 9.'
   end
 end

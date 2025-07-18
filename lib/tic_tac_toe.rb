@@ -34,7 +34,7 @@ class TicTacToe
   end
 
   def valid_move?(input)
-    input.to_i.to_s == input && (1..9).include?(input.to_i)
+    (0..8).include?(input.to_i) && !position_taken?(input.to_i)
   end
 
   def move(move_location, player_token = 'X')

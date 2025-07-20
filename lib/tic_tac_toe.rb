@@ -28,7 +28,6 @@ class TicTacToe
 
   def input_to_index(input)
     raise ArgumentError if input.nil?
-    raise MoveError unless valid_move?(input)
 
     input.to_i - 1
   end
@@ -54,6 +53,42 @@ class TicTacToe
   end
 
   def turn
+    loop do
+      print 'Enter an open position 1-9 to make your move: '
+      user_input = gets.chomp
+
+      begin
+        user_move = input_to_index(user_input)
+        raise MoveError unless valid_move?(user_move)
+
+        move(user_move, current_player)
+        display_board
+        break
+      rescue MoveError => e
+        puts e.message
+      end
+    end
+  end
+
+  def won?
+    WIN_COMBINATIONS.find do |combo|
+      board[combo[0]] == board[combo[1]] && board[combo[1]] == board[combo[2]] && board[combo[0]] != ' '
+    end
+  end
+
+  def full?
+    !board.include?(' ')
+  end
+
+  def draw?
+    full? && !won?
+  end
+
+  def over?
+    won? || full? || draw?
+  end
+
+  def winner
   end
 end
 

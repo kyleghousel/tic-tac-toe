@@ -91,6 +91,15 @@ class TicTacToe
   def winner
     board[won?[0]] if won?
   end
+
+  def play
+    turn until over?
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
+  end
 end
 
 class MoveError < StandardError
